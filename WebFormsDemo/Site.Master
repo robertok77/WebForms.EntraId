@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true"
+    CodeBehind="Site.Master.cs" Inherits="WebFormsDemo.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebFormsDemo — <asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+  <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <form runat="server">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">🏠 MyApp</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/Default.aspx">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Pages/Protected.aspx">Protected Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Pages/Account.aspx">My Account</a>
+            </li>
+          </ul>
+
+          
+          <ul class="navbar-nav">
+            <asp:LoginView ID="LoginView" runat="server">
+
+              
+              <AnonymousTemplate>
+                <li class="nav-item">
+                  <asp:LinkButton ID="SignIn" runat="server"
+                      CssClass="nav-link btn btn-link text-white"
+                      OnClick="SignIn_Click">
+                    🔐 Sign In with Microsoft
+                  </asp:LinkButton>
+                </li>
+              </AnonymousTemplate>
+
+              
+              <LoggedInTemplate>
+                <li class="nav-item d-flex align-items-center me-3">
+                  <span class="text-white-50 small">
+                    👤 <asp:Label ID="UserName" runat="server" />
+                  </span>
+                </li>
+                <li class="nav-item">
+                  <asp:LinkButton ID="SignOut" runat="server"
+                      CssClass="nav-link btn btn-link text-warning"
+                      OnClick="SignOut_Click">
+                    🚪 Sign Out
+                  </asp:LinkButton>
+                </li>
+              </LoggedInTemplate>
+
+            </asp:LoginView>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    
+    <div class="container mt-4">
+      <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </div>
+
+  </form>
+</body>
+</html>
